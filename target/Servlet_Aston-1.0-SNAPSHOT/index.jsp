@@ -10,6 +10,8 @@
 <br/>
 <a href="/student">Students</a>
 <br/>
-
+<a href="/teacher">Teacher</a>
+<br/>
+<a href="/course">Course</a>
 </body>
 </html>

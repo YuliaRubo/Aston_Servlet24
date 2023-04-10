@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface StudentService {
 
-    String findById(int id);
+    Student findById(int id);
     void deleteById();
     Student save();
     List<Student> findAll();

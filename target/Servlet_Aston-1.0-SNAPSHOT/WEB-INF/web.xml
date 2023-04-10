@@ -11,5 +11,22 @@
         <servlet-name>student</servlet-name>
         <url-pattern>/student</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>teacher</servlet-name>
+        <servlet-class>com.example.servlet_aston.servlet.TeacherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teacher</servlet-name>
+        <url-pattern>/teacher</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>course</servlet-name>
+        <servlet-class>com.example.servlet_aston.servlet.CourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>course</servlet-name>
+        <url-pattern>/course</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
