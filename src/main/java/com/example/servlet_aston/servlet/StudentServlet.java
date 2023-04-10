@@ -10,10 +10,10 @@ import java.util.List;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/student")
+@WebServlet(name = "helloServlet", urlPatterns = "/student")
 public class StudentServlet extends HttpServlet {
 
-StudentService service = new StudentServiceImpl();
+StudentServiceImpl service = new StudentServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Student> list = service.findAll();
