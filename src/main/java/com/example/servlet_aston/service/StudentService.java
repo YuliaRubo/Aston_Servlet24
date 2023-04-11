@@ -7,7 +7,7 @@ import java.util.List;
 public interface StudentService {
 
     Student findById(int id);
-    void deleteById();
-    Student save();
+    int deleteById(int id);
+    int save(Student student);
     List<Student> findAll();
 }

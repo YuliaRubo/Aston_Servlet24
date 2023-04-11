@@ -5,6 +5,7 @@ public class Teacher {
     private  String name;
     private  String surname;
 
+
     public Teacher(int id, String name, String surname) {
         this.id = id;
         this.name = name;
@@ -12,6 +13,11 @@ public class Teacher {
     }
 
     public Teacher() {
+    }
+
+    public Teacher(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
     }
 
     public int getId() {

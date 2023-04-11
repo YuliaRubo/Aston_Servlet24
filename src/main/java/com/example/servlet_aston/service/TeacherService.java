@@ -6,8 +6,8 @@ import com.example.servlet_aston.model.Teacher;
 import java.util.List;
 
 public interface TeacherService {
-    String findById(int id);
-    void deleteById();
-    Teacher save();
-    List<String> findAll();
+    Teacher findById(int id);
+    int deleteById(int id);
+    void save(Teacher teacher);
+    List<Teacher> findAll();
 }

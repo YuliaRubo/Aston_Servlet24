@@ -1,5 +1,6 @@
 package com.example.servlet_aston.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
@@ -14,6 +15,10 @@ public class Course {
 
     public Course(String name_course) {
     }
+
+    public Course() {
+        listStudent = new ArrayList<>();
+   }
 
     public Course(int id, String nameCourse, List<Student> listStudent) {
         this.id = id;
@@ -44,6 +49,8 @@ public class Course {
     public void setListStudent(List<Student> listStudent) {
         this.listStudent = listStudent;
     }
+
+
 
     @Override
     public String toString() {
