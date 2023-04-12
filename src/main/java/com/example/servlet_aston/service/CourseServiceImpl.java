@@ -95,36 +95,6 @@ public class CourseServiceImpl implements CourseService {
         return courseList;
     }
 
-
-//                    List<String>students = new ArrayList<>();
-//                    Student student = null;
-//                    String GET_CURSE_WITH_STUDENT_BY_ID = "select s.name, s.surname from course as c join student_course as sc" +
-//                            "on c.id = sc.id_course join student s on s.id = sc.id_student where id_course=?";
-//                    try(Connection connection = DBConnection.getDbConnectionOnly()){
-//                        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_CURSE_WITH_STUDENT_BY_ID)){
-//                            ResultSet resultSet = preparedStatement.executeQuery();
-//                            if(resultSet.next()){
-//                                String name= resultSet.getString(2);
-//                                String surname = resultSet.getString(3);
-//                                String info = name + " " + surname + " ";
-//                                students.add(info);
-                           // }
-
-//
-//                        }
-//                    }
-
-//                for (Course c: courseList){
-//
-//                    List<Student> list = c.getListStudent();
-//                    Student student = new Student(45, "Tillr" , "Fififi", 34, "M");
-//                    list.add(student);
-//
-
-
-
-
-
     @Override
     public Course findCourseWithStudent(int id) {
         Course course = new Course();
