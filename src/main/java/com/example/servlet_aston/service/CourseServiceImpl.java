@@ -6,9 +6,7 @@ import com.example.servlet_aston.model.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CourseServiceImpl implements CourseService {
     public static void main(String[] args) {
@@ -129,36 +127,28 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course findCourseWithStudent(int id) {
-        //String GET_CURSE = "Select * from course";
-        List<Course> list = new ArrayList<>();
-        Course course = null;
+        Course course = new Course();
+        List<Student> list1 = new ArrayList<>();
 
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("id", id);
-
-        String GET_CURSE_WITH_STUDENT_BY_ID = "select s.id, s.name, s.surname, s.age, s.gender, c.id, c.name_course from course as c join student_course as sc on c.id = sc.id_course join student s on s.id = sc.id_student where id_course =?";
+        String GET_CURSE_WITH_STUDENT_BY_ID = "select s.id as student_id, s.name, s.surname, s.age, s.gender, c.id as course_id, c.name_course from course as c join student_course as sc on c.id = sc.id_course join student s on s.id = sc.id_student where id_course =?";
         try (Connection connection = DBConnection.getDbConnectionOnly()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(GET_CURSE_WITH_STUDENT_BY_ID)) {
                 preparedStatement.setInt(1, id);
                 ResultSet rs = preparedStatement.executeQuery();
                 while (rs.next()) {
-                        course = new Course();
-                        if(course.getId()==0) {
-                            course.setId(rs.getInt("id"));
-                            course.setNameCourse(rs.getString("name_course"));
+                    course.setId(rs.getInt("course_id"));
+                    course.setNameCourse(rs.getString("name_course"));
 
-                        }
                     Student student = new Student();
-                    student.setId(rs.getInt("id"));
+                    student.setId(rs.getInt("student_id"));
                     student.setName(rs.getString("name"));
                     student.setSurname(rs.getString("surname"));
                     student.setAge(rs.getInt("age"));
                     student.setGender(rs.getString("gender"));
-                    List<Student>list1 = course.getListStudent();
                     list1.add(student);
+                }
                     course.setListStudent(list1);
            }
-            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
