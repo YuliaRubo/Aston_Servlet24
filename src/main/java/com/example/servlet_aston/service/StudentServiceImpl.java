@@ -29,7 +29,6 @@ public class StudentServiceImpl implements StudentService {
 //            System.out.println(st);
 //        }
 //    }
-
         DBConnection connect = new DBConnection();
         Statement statement = connect.getDbConnection();
 
