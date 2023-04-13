@@ -3,30 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <servlet>
-        <servlet-name>student</servlet-name>
-        <servlet-class>com.example.servlet_aston.servlet.StudentServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>student</servlet-name>
-        <url-pattern>/student</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>teacher</servlet-name>
-        <servlet-class>com.example.servlet_aston.servlet.TeacherServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>teacher</servlet-name>
-        <url-pattern>/teacher</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>course</servlet-name>
-        <servlet-class>com.example.servlet_aston.servlet.CourseServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>course</servlet-name>
-        <url-pattern>/course</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>student</servlet-name>-->
+<!--        <servlet-class>com.example.servlet_aston.servlet.StudentServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>student</servlet-name>-->
+<!--        <url-pattern>/student</url-pattern>-->
+<!--    </servlet-mapping>-->
+<!--    <servlet>-->
+<!--        <servlet-name>teacher</servlet-name>-->
+<!--        <servlet-class>com.example.servlet_aston.servlet.TeacherServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>teacher</servlet-name>-->
+<!--        <url-pattern>/teacher</url-pattern>-->
+<!--    </servlet-mapping>-->
+<!--    <servlet>-->
+<!--        <servlet-name>course</servlet-name>-->
+<!--        <servlet-class>com.example.servlet_aston.servlet.CourseServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>course</servlet-name>-->
+<!--        <url-pattern>/course</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 
 </web-app>
