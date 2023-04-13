@@ -10,4 +10,5 @@ public interface TeacherService {
     int deleteById(int id);
     void save(Teacher teacher);
     List<Teacher> findAll();
+    Teacher getCourseTeacherById(int id);
 }

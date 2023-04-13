@@ -1,10 +1,19 @@
 package com.example.servlet_aston.model;
 
+import java.util.List;
+
 public class Teacher {
     private int id;
     private  String name;
     private  String surname;
+    List<Course> listCourse;
 
+    public Teacher(int id, String name, String surname, List<Course> listcourse) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.listCourse = listcourse;
+    }
 
     public Teacher(int id, String name, String surname) {
         this.id = id;
@@ -13,6 +22,14 @@ public class Teacher {
     }
 
     public Teacher() {
+    }
+
+    public List<Course> getListCourse() {
+        return listCourse;
+    }
+
+    public void setListCourse(List<Course> listCourse) {
+        this.listCourse = listCourse;
     }
 
     public Teacher(String name, String surname) {
@@ -50,6 +67,7 @@ public class Teacher {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", listcourse=" + listCourse +
                 '}';
     }
 }

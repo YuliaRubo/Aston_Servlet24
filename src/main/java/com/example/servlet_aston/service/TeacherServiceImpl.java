@@ -1,6 +1,7 @@
 package com.example.servlet_aston.service;
 
 import com.example.servlet_aston.confic.DBConnection;
+import com.example.servlet_aston.model.Course;
 import com.example.servlet_aston.model.Student;
 import com.example.servlet_aston.model.Teacher;
 
@@ -10,13 +11,13 @@ import java.util.List;
 
 public class TeacherServiceImpl implements TeacherService{
 
-//    public static void main(String[] args) {
-//
-//        TeacherServiceImpl teacherService = new TeacherServiceImpl();
-////        List<String> list = teacherService.findAll();
-////        for (String s:list) {
-////            System.out.println(s);
-////        }
+    public static void main(String[] args) {
+
+        TeacherServiceImpl teacherService = new TeacherServiceImpl();
+        List<Teacher> list = teacherService.findAll();
+        for (Teacher s:list) {
+            System.out.println(s);
+        }}
 //        System.out.println(teacherService.findById( 2));
 ////       Teacher teacher = new Teacher("Nion", "Ferrary");
 ////       teacherService.save(teacher);
@@ -120,4 +121,32 @@ public class TeacherServiceImpl implements TeacherService{
         return listStr;
     }
 
+    @Override
+    public Teacher getCourseTeacherById(int id) {
+        Teacher teacher = new Teacher();
+        List<Course> courseList = new ArrayList<>();
+        String GET_ALL_COURSE_FOR_TEACHER = "Select t.id , t.name, t. surname,  c.id as course_id , c.name_course  from teacher  as t join course as c  on t.id = c.id_teacher where t.id =?";
+        try(Connection connection = DBConnection.getDbConnectionOnly()){
+            try(PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_COURSE_FOR_TEACHER)){
+                preparedStatement.setInt(1,id);
+                ResultSet rs  = preparedStatement.executeQuery();
+                while (rs.next()){
+                    teacher.setId(rs.getInt("id"));
+                    teacher.setName(rs.getString("name"));
+                    teacher.setName(rs.getString("surname"));
+
+                    Course course = new Course();
+                    course.setId(rs.getInt("id"));
+                    course.setNameCourse(rs.getString("name_course"));
+                    courseList.add(course);
+                }
+                teacher.setListCourse(courseList);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return teacher;
+    }
 }
