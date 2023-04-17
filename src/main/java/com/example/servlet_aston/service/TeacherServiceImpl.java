@@ -42,7 +42,6 @@ public class TeacherServiceImpl implements TeacherService{
 //    }
     DBConnection connect = new DBConnection();
     Statement statement = connect.getDbConnection();
-
     @Override
     public TeacherDTO findById(int id) {
         TeacherDTO teacherDTO = new TeacherDTO();
