@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TeacherService {
     TeacherDTO findById(int id);
-    int deleteById(int id);
+    void deleteById(int id);
     void save(Teacher teacher);
     List<TeacherDTO> findAll();
     TeacherDTO getCourseTeacherById(int id);

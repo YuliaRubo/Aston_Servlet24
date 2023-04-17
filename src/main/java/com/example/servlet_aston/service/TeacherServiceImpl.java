@@ -67,17 +67,25 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public int deleteById(int id) {
+    public void deleteById(int id) {
+        TeacherDTO teacherDTO = findById(id);
+        if(teacherDTO!=null){
+        List<CourseDTO> courseDTOS = teacherDTO.getListCourse();
+        for (CourseDTO c:courseDTOS){
+            int idCourse = c.getId();
+            deleteById(idCourse);
+        }
         String DELETE_FROM_TRACHER = "Delete from teacher where id=?";
         try(Connection con = DBConnection.getDbConnectionOnly()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(DELETE_FROM_TRACHER)) {
                 preparedStatement.setInt(1, id);
-                return preparedStatement.executeUpdate();
+                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        }
+
     }
 
     @Override
