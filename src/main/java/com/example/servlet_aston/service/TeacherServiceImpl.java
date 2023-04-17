@@ -1,9 +1,12 @@
 package com.example.servlet_aston.service;
 
+import com.example.servlet_aston.DTO.TeacherDTO;
+import com.example.servlet_aston.Entity.Course;
+import com.example.servlet_aston.Entity.Teacher;
+import com.example.servlet_aston.Mapping.CourseMapping;
+import com.example.servlet_aston.Mapping.TeacherMapping;
 import com.example.servlet_aston.confic.DBConnection;
-import com.example.servlet_aston.model.Course;
-import com.example.servlet_aston.model.Student;
-import com.example.servlet_aston.model.Teacher;
+import com.example.servlet_aston.DTO.CourseDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -42,11 +45,12 @@ public class TeacherServiceImpl implements TeacherService{
     Statement statement = connect.getDbConnection();
 
     @Override
-    public Teacher findById(int id) {
-     String FIND_BY_ID = "Select * from teacher where id=?";
-     Teacher teacher = null;
-     try(Connection connection = DBConnection.getDbConnectionOnly()){
-         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)){
+    public TeacherDTO findById(int id) {
+        TeacherDTO teacherDTO = new TeacherDTO();
+        String FIND_BY_ID = "Select * from teacher where id=?";
+        Teacher teacher = null;
+        try(Connection connection = DBConnection.getDbConnectionOnly()){
+            try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)){
              preparedStatement.setInt(1, id);
              ResultSet rs = preparedStatement.executeQuery();
              if(rs.next()){
@@ -59,7 +63,8 @@ public class TeacherServiceImpl implements TeacherService{
      } catch (SQLException e) {
          e.printStackTrace();
      }
-        return teacher;
+        teacherDTO = TeacherMapping.getTeacherDTOFromTeacher(teacher);
+        return teacherDTO;
     }
 
     @Override
@@ -94,13 +99,12 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public List<Teacher> findAll() {
+    public List<TeacherDTO> findAll() {
         statement = connect.getDbConnection();
         String GET_ALL_TEACHER = "Select * from teacher";
-        String str = null;
+        TeacherDTO teacherDTO = new TeacherDTO();
         List<Teacher>listStr = new ArrayList<>();
-        List<String>stringList = new ArrayList<>();
-
+        List<TeacherDTO> teacherDTOList = new ArrayList<>();
         try {
             ResultSet rs = statement.executeQuery(GET_ALL_TEACHER);
             while (rs.next()) {
@@ -112,22 +116,24 @@ public class TeacherServiceImpl implements TeacherService{
             }
             statement.close();
         }
-
         catch (SQLException e) {
             e.printStackTrace();
         }
         for (Teacher t: listStr) {
-            str = t.getName() +" "+ t.getSurname();
-            stringList.add(str);
+            teacherDTO = TeacherMapping.getTeacherDTOFromTeacher(t);
+            teacherDTOList.add(teacherDTO);
         }
 
-        return listStr;
+        return teacherDTOList;
     }
 
     @Override
-    public Teacher getCourseTeacherById(int id) {
+    public TeacherDTO getCourseTeacherById(int id) {
         Teacher teacher = new Teacher();
+        TeacherDTO teacherDTO =new TeacherDTO();
+        CourseDTO courseDTO = new CourseDTO();
         List<Course> courseList = new ArrayList<>();
+        List<CourseDTO> courseListDTO = new ArrayList<>();
         String GET_ALL_COURSE_FOR_TEACHER = "Select t.id as t_id, t.name, t. surname,  c.id as c_id , c.name_course  from teacher  as t join course as c  on t.id = c.id_teacher where t.id =?";
         try(Connection connection = DBConnection.getDbConnectionOnly()){
             try(PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_COURSE_FOR_TEACHER)){
@@ -143,13 +149,19 @@ public class TeacherServiceImpl implements TeacherService{
                     course.setNameCourse(rs.getString("name_course"));
                     courseList.add(course);
                 }
-                teacher.setListCourse(courseList);
+
+                for(Course c: courseList){
+                    courseDTO = CourseMapping.getCourseDTOFromCourse(c);
+                    courseListDTO.add(courseDTO);
+                }
+                teacherDTO = TeacherMapping.getTeacherDTOFromTeacher(teacher);
+                teacherDTO.setListCourse(courseListDTO);
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return teacher;
+        return teacherDTO;
     }
 }

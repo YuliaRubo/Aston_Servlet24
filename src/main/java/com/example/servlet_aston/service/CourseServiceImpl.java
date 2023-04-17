@@ -1,8 +1,12 @@
 package com.example.servlet_aston.service;
 
+import com.example.servlet_aston.Entity.Course;
+import com.example.servlet_aston.Entity.Student;
+import com.example.servlet_aston.Mapping.CourseMapping;
+import com.example.servlet_aston.Mapping.StudentMapping;
 import com.example.servlet_aston.confic.DBConnection;
-import com.example.servlet_aston.model.Course;
-import com.example.servlet_aston.model.Student;
+import com.example.servlet_aston.DTO.CourseDTO;
+import com.example.servlet_aston.DTO.StudentDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,16 +15,16 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
     public static void main(String[] args) {
       CourseServiceImpl courseService = new CourseServiceImpl();
-     // Course course1 = new Course("N");
-      //courseService.save(course1);
+      Course course1 = new Course();
+      courseService.save(course1);
       //courseService.deleteById(7);
 
-      List<Course> list = courseService.findAll();
-        for (Course c: list) {
+      List<CourseDTO> list = courseService.findAll();
+        for (CourseDTO c: list) {
             System.out.println(c);
         }
-        //System.out.println(courseService.findById(7));
-      Course c = courseService.findCourseWithStudent(4);
+        System.out.println(courseService.findById(7));
+      CourseDTO c = courseService.findCourseWithStudent(4);
         System.out.println(c);
 
 
@@ -30,7 +34,7 @@ public class CourseServiceImpl implements CourseService {
     Statement statement = connect.getDbConnection();
 
     @Override
-    public Course findById(int id) {
+    public CourseDTO findById(int id) {
         String FIND_BY_ID = "Select * from course where id = ?";
         Course course = null;
         try (Connection con = DBConnection.getDbConnectionOnly()) {
@@ -46,11 +50,14 @@ public class CourseServiceImpl implements CourseService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return course;
+        CourseDTO courseDTO = CourseMapping.getCourseDTOFromCourse(course);
+        return courseDTO;
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteCourseById(int id) {
+
+
         String DELETE_COURSE = "Delete from course where id =?";
         try (Connection connection = DBConnection.getDbConnectionOnly()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_COURSE)) {
@@ -78,7 +85,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-        public List<Course> findAll() {
+        public List<CourseDTO> findAll() {
             String GET_ALL_COURSE = "select * from course";
             List<Course> courseList = new ArrayList<>();
             try {
@@ -92,14 +99,21 @@ public class CourseServiceImpl implements CourseService {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        return courseList;
+            List<CourseDTO> courseDTOList = new ArrayList<>();
+            for(Course c:courseList){
+                CourseDTO courseDTO = CourseMapping.getCourseDTOFromCourse(c);
+                courseDTOList.add(courseDTO);
+            }
+        return courseDTOList;
     }
 
 
     @Override
-    public Course findCourseWithStudent(int id) {
+    public CourseDTO findCourseWithStudent(int id) {
+        CourseDTO courseDTO = new CourseDTO();
         Course course = new Course();
         List<Student> list1 = new ArrayList<>();
+        List<StudentDTO> listDto = new ArrayList<>();
 
         String GET_CURSE_WITH_STUDENT_BY_ID = "select s.id as student_id, s.name, s.surname, s.age, s.gender, c.id as course_id, c.name_course from course as c join student_course as sc on c.id = sc.id_course join student s on s.id = sc.id_student where id_course =?";
         try (Connection connection = DBConnection.getDbConnectionOnly()) {
@@ -118,12 +132,21 @@ public class CourseServiceImpl implements CourseService {
                     student.setGender(rs.getString("gender"));
                     list1.add(student);
                 }
-                    course.setListStudent(list1);
+
+                for(Student s:list1){
+                    StudentDTO studentDTO = StudentMapping.getStudentDTOFromStudent(s);
+                    listDto.add(studentDTO);
+                }
+                courseDTO = CourseMapping.getCourseDTOFromCourse(course);
+                courseDTO.setListStudent(listDto);
+
+                    //course.setListStudent(list1);
            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return course;
+
+        return courseDTO;
     }
 }
 

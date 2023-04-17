@@ -1,14 +1,14 @@
 package com.example.servlet_aston.service;
 
-import com.example.servlet_aston.model.Student;
-import com.example.servlet_aston.model.Teacher;
+import com.example.servlet_aston.DTO.TeacherDTO;
+import com.example.servlet_aston.Entity.Teacher;
 
 import java.util.List;
 
 public interface TeacherService {
-    Teacher findById(int id);
+    TeacherDTO findById(int id);
     int deleteById(int id);
     void save(Teacher teacher);
-    List<Teacher> findAll();
-    Teacher getCourseTeacherById(int id);
+    List<TeacherDTO> findAll();
+    TeacherDTO getCourseTeacherById(int id);
 }

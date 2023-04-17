@@ -1,8 +1,6 @@
 package com.example.servlet_aston.servlet;
 
-import com.example.servlet_aston.confic.DBConnection;
-import com.example.servlet_aston.model.Student;
-import com.example.servlet_aston.service.StudentService;
+import com.example.servlet_aston.DTO.StudentDTO;
 import com.example.servlet_aston.service.StudentServiceImpl;
 
 import java.io.*;
@@ -16,7 +14,7 @@ public class StudentServlet extends HttpServlet {
 StudentServiceImpl service = new StudentServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Student> list = service.findAll();
+        List<StudentDTO> list = service.findAll();
         PrintWriter printWriter = response.getWriter();
         printWriter.write("\n" + "Our Student" + "\n");
         printWriter.write(String.valueOf(list));

@@ -1,16 +1,16 @@
 package com.example.servlet_aston.service;
 
-import com.example.servlet_aston.model.Course;
-import com.example.servlet_aston.model.Student;
+import com.example.servlet_aston.DTO.CourseDTO;
+import com.example.servlet_aston.Entity.Course;
 
 import java.util.List;
 
 public interface CourseService {
-    Course findById(int id);
+    CourseDTO findById(int id);
 
     // Course findById(int id);
-    void deleteById(int id);
-   void save(Course course);
-    List<Course> findAll();
-    Course findCourseWithStudent(int id);
+    void deleteCourseById(int id);
+    void save(Course course);
+    List<CourseDTO> findAll();
+    CourseDTO findCourseWithStudent(int id);
 }

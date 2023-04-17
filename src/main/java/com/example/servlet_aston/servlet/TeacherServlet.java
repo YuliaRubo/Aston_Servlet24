@@ -1,7 +1,6 @@
 package com.example.servlet_aston.servlet;
 
-import com.example.servlet_aston.model.Student;
-import com.example.servlet_aston.model.Teacher;
+import com.example.servlet_aston.DTO.TeacherDTO;
 import com.example.servlet_aston.service.TeacherService;
 import com.example.servlet_aston.service.TeacherServiceImpl;
 
@@ -21,7 +20,7 @@ public class TeacherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Teacher> list = service.findAll();
+        List<TeacherDTO> list = service.findAll();
         PrintWriter printWriter = resp.getWriter();
         printWriter.write("\n" + "Our Teacher" + "\n");
         printWriter.write(String.valueOf(list));

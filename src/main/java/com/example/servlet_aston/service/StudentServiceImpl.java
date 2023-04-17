@@ -1,28 +1,32 @@
 package com.example.servlet_aston.service;
 
+import com.example.servlet_aston.Entity.Course;
+import com.example.servlet_aston.Entity.Student;
+import com.example.servlet_aston.Mapping.CourseMapping;
+import com.example.servlet_aston.Mapping.StudentMapping;
 import com.example.servlet_aston.confic.DBConnection;
-import com.example.servlet_aston.model.Course;
-import com.example.servlet_aston.model.Student;
+import com.example.servlet_aston.DTO.CourseDTO;
+import com.example.servlet_aston.DTO.StudentDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
-    public static void main(String[] args) {
-        StudentServiceImpl service = new StudentServiceImpl();
+//    public static void main(String[] args) {
+//        StudentServiceImpl service = new StudentServiceImpl();
 //        Student student = service.findById(5);
 //        System.out.println(student);
 //        Student student1= new Student("Lily", "Sorr", 18, "F");
 //        service.save(student1);
-        List<Student> list = service.findAll();
-        for (Student st : list) {
-            System.out.println(st);
-        }
-        Student student = service.findAllCourseStudent(1);
-        System.out.println(student);
-
-    }
+//        List<StudentDTO> list = service.findAll();
+//        for (StudentDTO st : list) {
+//            System.out.println(st);
+//        }
+//        StudentDTO student = service.findAllCourseStudent(1);
+//        System.out.println(student);
+//
+//    }
 //        service.deleteById(8);
 //        List<Student>list1 = service.findAll();
 //        for (Student st: list1){
@@ -34,8 +38,8 @@ public class StudentServiceImpl implements StudentService {
 
 
         @Override
-        public Student findById ( int id){
-            Student student = null;
+        public StudentDTO findById (int id){
+            StudentDTO student = null;
             String GET_STUDENT_BY_ID = "Select * from student where id = ?";
             System.out.println(GET_STUDENT_BY_ID + " " + "zapros");
             try (Connection con = DBConnection.getDbConnectionOnly()) {
@@ -48,7 +52,7 @@ public class StudentServiceImpl implements StudentService {
                         String surname = resultSet.getString(3);
                         int age = resultSet.getInt(4);
                         String gender = resultSet.getString(5);
-                        student = new Student(idStudent, name, surname, age, gender);
+                        student = new StudentDTO(idStudent, name, surname, age, gender);
                     }
                 }
 
@@ -95,11 +99,13 @@ public class StudentServiceImpl implements StudentService {
         }
 
         @Override
-        public List<Student> findAll () {
+        public List<StudentDTO> findAll () {
             statement = connect.getDbConnection();
             String GET_ALL_STUDENT = "Select * from student";
-            String str = null;
+            StudentDTO studentDTO = new StudentDTO();
+
             List<Student> listStr = new ArrayList<>();
+            List<StudentDTO>studentDTOList = new ArrayList<>();
 
             try {
                 ResultSet rs = statement.executeQuery(GET_ALL_STUDENT);
@@ -117,13 +123,22 @@ public class StudentServiceImpl implements StudentService {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return listStr;
+
+            for (Student d: listStr){
+                studentDTO = StudentMapping.getStudentDTOFromStudent(d);
+                studentDTOList.add(studentDTO);
+
+            }
+            return studentDTOList;
         }
 
         @Override
-        public Student findAllCourseStudent ( int id){
+        public StudentDTO findAllCourseStudent (int id){
+            StudentDTO studentDTO = new StudentDTO();
+            List<Course>courseList = new ArrayList<>();
+            List<CourseDTO> list1 = new ArrayList<>();
             Student student = new Student();
-            List<Course> list1 = new ArrayList<>();
+            CourseDTO courseDTO = new CourseDTO();
 
             String GET_STUDENT_WITH_COURSE_BY_ID = "select s.id as student_id, s.name, s.surname, s.age, s.gender, c.id as course_id, c.name_course from course as c join student_course as sc on c.id = sc.id_course join student s on s.id = sc.id_student where id_student =?";
             try (Connection connection = DBConnection.getDbConnectionOnly()) {
@@ -140,14 +155,19 @@ public class StudentServiceImpl implements StudentService {
                         Course course = new Course();
                         course.setId(rs.getInt("course_id"));
                         course.setNameCourse(rs.getString("name_course"));
-                        list1.add(course);
+                        courseList.add(course);
                     }
-                    student.setCourseList(list1);
+                    for (Course c:courseList){
+                        courseDTO = CourseMapping.getCourseDTOFromCourse(c);
+                        list1.add(courseDTO);
+                    }
+                    studentDTO = StudentMapping.getStudentDTOFromStudent(student);
+                    studentDTO.setCourseList(list1);
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            return student;
+            return studentDTO;
         }
     }
 
