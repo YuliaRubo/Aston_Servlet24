@@ -75,6 +75,7 @@ public class TeacherServiceImpl implements TeacherService{
             int idCourse = c.getId();
             deleteById(idCourse);
         }
+
         String DELETE_FROM_TRACHER = "Delete from teacher where id=?";
         try(Connection con = DBConnection.getDbConnectionOnly()) {
             try (PreparedStatement preparedStatement = con.prepareStatement(DELETE_FROM_TRACHER)) {
