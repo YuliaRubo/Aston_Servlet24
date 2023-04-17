@@ -13,22 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
-    public static void main(String[] args) {
-      CourseServiceImpl courseService = new CourseServiceImpl();
-      Course course1 = new Course();
-      courseService.save(course1);
-      //courseService.deleteById(7);
-
-      List<CourseDTO> list = courseService.findAll();
-        for (CourseDTO c: list) {
-            System.out.println(c);
-        }
-        System.out.println(courseService.findById(7));
-      CourseDTO c = courseService.findCourseWithStudent(4);
-        System.out.println(c);
-
-
-    }
+//    public static void main(String[] args) {
+//      CourseServiceImpl courseService = new CourseServiceImpl();
+//      Course course1 = new Course();
+//      courseService.save(course1);
+//      //courseService.deleteById(7);
+//
+//      List<CourseDTO> list = courseService.findAll();
+//        for (CourseDTO c: list) {
+//            System.out.println(c);
+//        }
+//        System.out.println(courseService.findById(7));
+//      CourseDTO c = courseService.findCourseWithStudent(4);
+//        System.out.println(c);
+//
+//
+//    }
 
     DBConnection connect = new DBConnection();
     Statement statement = connect.getDbConnection();
