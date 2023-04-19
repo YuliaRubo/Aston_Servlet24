@@ -1,0 +1,8 @@
+table {
+    table-layout: fixed;
+    width: 60%;
+    border-collapse: collapse;
+    border: 5px solid grey;
+    font-family: 'Rock Salt', cursive;
+
+}
