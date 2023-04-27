@@ -25,6 +25,11 @@ public class TeacherDTO {
     public TeacherDTO() {
     }
 
+    public TeacherDTO(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public int getId() {
         return id;
     }

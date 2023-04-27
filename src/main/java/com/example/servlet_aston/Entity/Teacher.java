@@ -11,6 +11,11 @@ public class Teacher {
         this.surname = surname;
     }
 
+    public Teacher(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public Teacher() {
     }
 

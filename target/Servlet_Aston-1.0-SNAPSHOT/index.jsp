@@ -13,7 +13,6 @@
 <a href="/teacher">Teacher</a>
 <br/>
 <a href="/course">Course</a>
-<br/>
-<a href="/course.jsp">Course</a>
+
 </body>
 </html>

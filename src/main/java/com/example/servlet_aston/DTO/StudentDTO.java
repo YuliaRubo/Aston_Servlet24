@@ -1,5 +1,6 @@
 package com.example.servlet_aston.DTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDTO {
@@ -8,7 +9,7 @@ public class StudentDTO {
     private String surname;
     private int age;
     private String gender;
-    List<CourseDTO> courseList;
+    List<CourseDTO> courseList=new ArrayList<>();
 
     public StudentDTO(int id, String name, String surname, int age, String gender, List<CourseDTO> courseList) {
         this.id = id;
