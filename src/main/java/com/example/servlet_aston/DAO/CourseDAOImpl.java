@@ -14,32 +14,6 @@ import java.util.List;
 
 public class CourseDAOImpl implements CourseDAO {
 
-    public static void main(String[] args) throws SQLException {
-        CourseDAOImpl courseDAO = new CourseDAOImpl(new DBConfig());
-//
-//        courseDAO.update(new Course(4, "Ibnn", 5));
-//        courseDAO.deleteCourseById(9);
-//
-//
-//
-//        List<CourseDTO>list = courseDAO.findAll();
-//        for (CourseDTO d: list){
-//            System.out.println(d);
-//        }
-//
-        CourseDTO courseDTO = courseDAO.findCourseWithStudent(4);
-        System.out.println(courseDTO);
-////
-//        //courseDAO.save(new Course("ggjfifj", 3));
-//        //3,Popullar,Liliop
-//        List<CourseDTO> list = courseDAO.findAll();
-//        for (CourseDTO d : list) {
-//            System.out.println(d);
-//        }
-
-//        CourseDTO courseDTO1 = courseDAO.findCourseWithStudent(2);
-//        System.out.println(courseDTO1);
-    }
 
     private DBConfig config;
     private Statement statement;
@@ -111,6 +85,7 @@ public class CourseDAOImpl implements CourseDAO {
             e.printStackTrace();
         }
     }
+
     @Override
     public void update(Course course) {
         Connection connection = config.getConnection();

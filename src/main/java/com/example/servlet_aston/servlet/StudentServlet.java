@@ -14,11 +14,10 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet("/student/*")
+@WebServlet(urlPatterns = "/student/*")
 public class StudentServlet extends HttpServlet {
 
-    private  StudentServiceImpl service;
-
+    private StudentServiceImpl service;
 
     @Override
     public void init() throws ServletException {
@@ -47,6 +46,7 @@ public class StudentServlet extends HttpServlet {
             p.write(s);
         }  //printWriter.write(String.valueOf(course));
 
+
     }
 
     @Override
@@ -54,7 +54,7 @@ public class StudentServlet extends HttpServlet {
         String requestPath = req.getRequestURI();
         req.setCharacterEncoding("UTF-8");
         PrintWriter printWriter = resp.getWriter();
-        String[] url1 = requestPath .split("/");
+        String[] url1 = requestPath.split("/");
         String idForDelete = url1[2];
         try {
             service.deleteById(Integer.parseInt(url1[2]));
@@ -72,7 +72,7 @@ public class StudentServlet extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper(); //объект маппера json
         String json = req.getReader().lines().collect(Collectors.joining()); // вытаскиваю из тела запроса весь текст и собираю в единую строку
-        StudentDTO studentDTO = mapper.readValue(json,StudentDTO.class);
+        StudentDTO studentDTO = mapper.readValue(json, StudentDTO.class);
         service.save(studentDTO);
     }
 
@@ -90,7 +90,6 @@ public class StudentServlet extends HttpServlet {
         courseDTO.setId(Integer.parseInt(studentId));
         service.update(courseDTO);
     }
-
 
 
     public void destroy() {

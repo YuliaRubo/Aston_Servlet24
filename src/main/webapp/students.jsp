@@ -10,8 +10,13 @@
 <html>
 <head>
 
+<<<<<<< HEAD
     <title>Courses</title>
     <%--        <link href ="student.css" rel= "stylesheet"/>--%>
+=======
+        <title>Courses</title>
+<%--        <link href ="student.css" rel= "stylesheet"/>--%>
+>>>>>>> origin/master
     <style>
         td {
             border-style: double; /* Стиль линии вокруг абзаца */
@@ -27,12 +32,21 @@
         <th>Name</th>
         <th>SurName</th>
         <th>Age</th>
+<<<<<<< HEAD
         <%--        <th>Actions</th>--%>
     </tr>
     </thead>
     <tbody>
 <%--    <a href="/course/"><input type="button" value = "Courses"></a>--%>
     <%--    <a href="/teacher/"><input type="button" value = "Courses"></a>--%>
+=======
+<%--        <th>Actions</th>--%>
+    </tr>
+    </thead>
+    <tbody>
+    <a href="/course/"><input type="button" value = "Courses"></a>
+<%--    <a href="/teacher/"><input type="button" value = "Courses"></a>--%>
+>>>>>>> origin/master
     <br>
     <br>
     <br>
@@ -43,9 +57,15 @@
             <td>${student.name}</td>
             <td>${student.surname}</td>
             <td>${student.age}</td>
+<<<<<<< HEAD
                 <%--            <td><a href="http://Localhost:8080/add-new-student"><input type="button" value = "Add"></a></td>--%>
                 <%--            <td><a href="http://Localhost:8080/update-student?id=${student.id}"><input type="button" value = "Update"></a></td>--%>
             <td><input type="button" value = "Delete"></td>
+=======
+<%--            <td><a href="http://Localhost:8080/add-new-student"><input type="button" value = "Add"></a></td>--%>
+<%--            <td><a href="http://Localhost:8080/update-student?id=${student.id}"><input type="button" value = "Update"></a></td>--%>
+<%--            <td><a href="http://Localhost:8080/delete-student?id=${student.id}"><input type="button" value = "Delete"></a></td>--%>
+>>>>>>> origin/master
 
         </tr>
     </c:forEach>
@@ -65,4 +85,8 @@
 <%--</c:forEach>--%>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> origin/master
