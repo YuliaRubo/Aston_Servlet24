@@ -11,23 +11,6 @@ public class StudentDTO {
     private String gender;
     List<CourseDTO> courseList=new ArrayList<>();
 
-    public StudentDTO(int id, String name, String surname, int age, String gender, List<CourseDTO> courseList) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.gender = gender;
-        this.courseList = courseList;
-    }
-
-    public List<CourseDTO> getCourseList() {
-        return courseList;
-    }
-
-    public void setCourseList(List<CourseDTO> courseList) {
-        this.courseList = courseList;
-    }
-
     public StudentDTO(int id, String name, String surname, int age, String gender) {
         this.id = id;
         this.name = name;
@@ -45,6 +28,25 @@ public class StudentDTO {
 
     public StudentDTO() {
     }
+
+    public StudentDTO(int id, String name, String surname, int age, String gender, List<CourseDTO> courseList) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.gender = gender;
+        this.courseList = courseList;
+    }
+
+
+    public List<CourseDTO> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<CourseDTO> courseList) {
+        this.courseList = courseList;
+    }
+
 
     public String getName() {
         return name;

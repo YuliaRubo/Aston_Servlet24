@@ -20,6 +20,17 @@ public class CourseDTO {
         this.teacherId = teacherId;
     }
 
+    public CourseDTO(String nameCourse, Integer teacherId) {
+        this.nameCourse = nameCourse;
+        this.teacherId = teacherId;
+    }
+
+    public CourseDTO(int id, String nameCourse, Integer teacherId) {
+        this.id = id;
+        this.nameCourse = nameCourse;
+        this.teacherId = teacherId;
+    }
+
     public int getId() {
         return id;
     }

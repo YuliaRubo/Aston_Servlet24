@@ -13,12 +13,19 @@ public class StudentServiceImpl implements StudentService {
 //    public static void main(String[] args) {
 //        StudentServiceImpl service = new StudentServiceImpl();
 //
+//        service.save(new StudentDTO("B", "F", 23, "F"));
+//        List<StudentDTO>list = service.findAll();
+//        for (StudentDTO s:list){
+//            System.out.println(s);
+//        }
+
+//
 //        StudentDTO studentDTO = service.findById(2);
 //        System.out.println(studentDTO);
 //
 //        StudentDTO studentDTO1 = service.findAllCourseStudent(2);
 //        System.out.println(studentDTO1);
-//    }
+  //}
 
 
     private StudentDAOImpl studentDAO;

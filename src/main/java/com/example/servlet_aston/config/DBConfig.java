@@ -29,7 +29,7 @@ public class DBConfig {
     public DBConfig(String test) {
         if (test.equals("test")) {
             this.driver = "org.h2.Driver";
-            this.url = "jdbc:h2:./db/studentOnCourse";
+            this.url = "jdbc:h2:D:\\project IDEA\\Aston_Servlet24\\db\\studentOnCourse";
             this.username = "sa";
             this.password = "";
         }

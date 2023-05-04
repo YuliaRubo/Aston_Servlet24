@@ -40,7 +40,7 @@ public class StudentDAOImpl implements StudentDAO {
     public static final String GET_STUDENT_BY_ID = "Select id, name, surname, age, gender from student where id = ?";
     public static final String sqlUpdate = "DELETE from  student_course where id_student = ?";
     public static final String DELETE_FROM_STUDENT = "Delete from student where id=?";
-    public static final String INSERT_IN_STUDENT = "Insert into student (id, name, surname, age, gender) values (?, ? , ?, ?, ?)";
+    public static final String INSERT_IN_STUDENT = "Insert into student ( name, surname, age, gender) values (?, ? , ?, ?)";
     public static final String GET_ALL_STUDENT = "Select id, name, surname, age, gender from student";
     public static final String GET_STUDENT_WITH_COURSE_BY_ID = "select s.id as student_id, s.name, s.surname, s.age, s.gender, c.id as course_id, c.name_course from course as c join student_course as sc on c.id = sc.id_course join student s on s.id = sc.id_student where id_student =?";
     public static final String UPDATE_STUDENT = "UPDATE student set name=?, surname =?, age =?, gender = ? where id=?";
@@ -49,7 +49,7 @@ public class StudentDAOImpl implements StudentDAO {
     public StudentDTO findById(int id) {
         StudentDTO studentDTO = new StudentDTO();
         Connection con = config.getConnection();
-        System.out.println(GET_STUDENT_BY_ID + " " + "zapros");
+       // System.out.println(GET_STUDENT_BY_ID + " " + "zapros");
         Student student = new Student();
 
         try (PreparedStatement preparedStatement = con.prepareStatement(GET_STUDENT_BY_ID)) {
@@ -93,11 +93,11 @@ public class StudentDAOImpl implements StudentDAO {
         System.out.println(INSERT_IN_STUDENT + " " + "zapros insert");
         Connection con = config.getConnection();
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_IN_STUDENT)) {
-            preparedStatement.setInt(1, student.getId());
-            preparedStatement.setString(2, student.getName());
-            preparedStatement.setString(3, student.getSurname());
-            preparedStatement.setInt(4, student.getAge());
-            preparedStatement.setString(5, student.getGender());
+            //preparedStatement.setInt(1, student.getId());
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setString(2, student.getSurname());
+            preparedStatement.setInt(3, student.getAge());
+            preparedStatement.setString(4, student.getGender());
             return preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

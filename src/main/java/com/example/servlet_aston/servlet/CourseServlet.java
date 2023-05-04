@@ -21,6 +21,9 @@ public class CourseServlet extends HttpServlet {
 
     private CourseService service;
 
+    public CourseServlet(CourseService service) {
+        this.service = service;
+    }
 
     @Override
     public void init() throws ServletException {

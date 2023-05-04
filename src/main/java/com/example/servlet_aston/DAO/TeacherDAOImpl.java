@@ -50,7 +50,7 @@ public class TeacherDAOImpl implements TeacherDAO {
 
     public static final String FIND_BY_ID = "Select id, name, surname from teacher where id=?";
     public static final String DELETE_FROM_TRACHER = "Delete from teacher where id=?";
-    public static final String INSERT_TEACHER = "Insert into teacher(id, name, surname) values (?,?,?)";
+    public static final String INSERT_TEACHER = "Insert into teacher(name, surname) values (?,?)";
     public static final String GET_ALL_TEACHER = "Select id, name, surname from teacher";
     public static final String GET_ALL_COURSE_FOR_TEACHER = "Select t.id as t_id, t.name, t. surname,  c.id as c_id , c.name_course  from teacher  as t join course as c  on t.id = c.id_teacher where t.id =?";
     public static final String UPDATE_TEACHER = "UPDATE teacher SET name = ?, surname = ?  WHERE id = ?;";
@@ -101,9 +101,9 @@ public class TeacherDAOImpl implements TeacherDAO {
         Connection connection = config.getConnection();
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TEACHER)) {
-                preparedStatement.setInt(1, teacher.getId());
-                preparedStatement.setString(2, teacher.getName());
-                preparedStatement.setString(3, teacher.getSurname());
+                //preparedStatement.setInt(1, teacher.getId());
+                preparedStatement.setString(1, teacher.getName());
+                preparedStatement.setString(2, teacher.getSurname());
                 preparedStatement.execute();
 
 

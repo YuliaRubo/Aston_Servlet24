@@ -1,9 +1,10 @@
 package com.example.servlet_aston.DAO;
 
+import com.example.servlet_aston.DTO.CourseDTO;
+import com.example.servlet_aston.DTO.StudentDTO;
 import com.example.servlet_aston.Entity.Course;
-import com.example.servlet_aston.Entity.Student;
-import com.example.servlet_aston.Entity.Teacher;
 import com.example.servlet_aston.config.DBConfig;
+import com.example.servlet_aston.service.CourseService;
 import com.example.servlet_aston.service.CourseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,13 +13,15 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 class CourseDAOImplTest {
 
     private static CourseDAOImpl courseDAO;
-    private static CourseServiceImpl courseService;
+    private static CourseService courseService;
 
 
     @BeforeEach
@@ -29,41 +32,50 @@ class CourseDAOImplTest {
         courseService = new CourseServiceImpl(courseDAO);
     }
 
-//
-//    private static final Course MATH = new Course(1, "Math",3);
-//    private  static  final Student MARK= new Student("Mark","Merkovka", 25, "M");
-//    private  static  final Teacher SEMEN = new Teacher("Semen", "Semenovich");
-
-
-
     @Test
     @DisplayName("Get Course by id test")
-    void findById() {
-
-        int id = 1;
-        String nameCourse = "";
-        int teacherId = 10;
-
+    void findByIdCourse() {
+        CourseDTO courseDTO = courseDAO.findById(2);
+        assertThat(courseDTO.getNameCourse()).isEqualTo("Graphic");
 
     }
 
     @Test
-    void deleteCourseById() {
+    void deleteCourseById() throws SQLException {
+        courseDAO.deleteCourseById(2);
+        List<CourseDTO> all = courseDAO.findAll();
+        assertThat(all.size()).isEqualTo(2);
     }
 
     @Test
     void save() {
+        courseDAO.save(new Course("Dance", 2));
+        List<CourseDTO> all = courseDAO.findAll();
+        assertThat(all.size()).isEqualTo(4);
+        assertThat(all.get(all.size() - 1).getNameCourse()).isEqualTo("Dance");
     }
 
     @Test
     void update() {
+        courseDAO.update(new Course(1, "Math3", 1));
+        CourseDTO course = courseDAO.findById(1);
+        assertThat(course.getNameCourse()).isEqualTo("Math3");
+
     }
 
     @Test
-    void findAll() {
+    void findAllTestSize() {
+        List<CourseDTO> all = courseDAO.findAll();
+        assertThat(all.size()).isNotEqualTo(5);
     }
 
     @Test
     void findCourseWithStudent() {
+        CourseDTO courseDTO = courseDAO.findCourseWithStudent(2);
+        List<StudentDTO> listStudent = courseDTO.getListStudent();
+        StudentDTO studentDTO = listStudent.get(0);
+        assertThat(studentDTO.getName()).isEqualTo("One");
     }
+
+
 }
